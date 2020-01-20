@@ -1,0 +1,361 @@
+<robot
+  name="gemini_arm_description">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.000343175586928216 0.00159787363524551 0.0403642614752203"
+        rpy="0 0 0" />
+      <mass
+        value="0.538356341355379" />
+      <inertia
+        ixx="0.000222899831003166"
+        ixy="3.6750996181586E-07"
+        ixz="-6.55749815031899E-07"
+        iyy="0.000221481349506303"
+        iyz="4.21671858829903E-06"
+        izz="3.91522409370846E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="0.000243676555697897 -0.00765546940645542 0.0548166765281359"
+        rpy="0 0 0" />
+      <mass
+        value="0.429111339765701" />
+      <inertia
+        ixx="0.000409405108031968"
+        ixy="7.26674271771078E-06"
+        ixz="-5.90571331289724E-07"
+        iyy="8.54561562597211E-05"
+        iyz="2.90764208063658E-05"
+        izz="0.000326683712310297" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="continuous">
+    <origin
+      xyz="0 0 0.0919999999999988"
+      rpy="0 -5.40931672317945E-57 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="-8.17473248963282E-05 0.0758952429917856 -0.00330618034523168"
+        rpy="0 0 0" />
+      <mass
+        value="0.302188994279633" />
+      <inertia
+        ixx="0.0010159649861604"
+        ixy="-2.93594711382165E-06"
+        ixz="-2.13328310648836E-05"
+        iyy="0.00086331027836668"
+        iyz="-0.000118741141128118"
+        izz="0.000153709642304199" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="continuous">
+    <origin
+      xyz="0 0 0.0599999999999999"
+      rpy="1.57079632679489 4.93038065763132E-29 0" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0.0247180551164637 0 0.999694462198956" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="1.46872506379563E-05 0.00957042421327847 0.000512942113211012"
+        rpy="0 0 0" />
+      <mass
+        value="0.304609228794722" />
+      <inertia
+        ixx="0.000242576727670286"
+        ixy="2.17319668714494E-07"
+        ixz="-4.7905709289069E-06"
+        iyy="0.000193449162659685"
+        iyz="8.79117964216293E-06"
+        izz="4.93660161141823E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint3"
+    type="continuous">
+    <origin
+      xyz="0 0.16 0"
+      rpy="0 0 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0.0247180551164622 0 0.999694462198956" />
+  </joint>
+  <link
+    name="link4">
+    <inertial>
+      <origin
+        xyz="0.0159924901724656 0.000394301121184798 0.105073896318767"
+        rpy="0 0 0" />
+      <mass
+        value="0.305571701729797" />
+      <inertia
+        ixx="0.0010393292967984"
+        ixy="-1.38485655196205E-05"
+        ixz="-0.000380817386311283"
+        iyy="0.00159912419773307"
+        iyz="-9.4482590918704E-06"
+        izz="0.000560479698533195" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint4"
+    type="continuous">
+    <origin
+      xyz="0 0.0604999999999999 0"
+      rpy="-1.5707963267949 -2.77833251643473E-32 5.14058640557261E-17" />
+    <parent
+      link="link3" />
+    <child
+      link="link4" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link5">
+    <inertial>
+      <origin
+        xyz="2.65427314211086E-06 0.0138850593175555 0.0468056414886495"
+        rpy="0 0 0" />
+      <mass
+        value="0.109576445134181" />
+      <inertia
+        ixx="5.10151179021903E-05"
+        ixy="-4.88131136782569E-09"
+        ixz="-1.75636527417655E-09"
+        iyy="2.66411210366452E-05"
+        iyz="-2.82682039948589E-08"
+        izz="2.43739993985074E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint5"
+    type="continuous">
+    <origin
+      xyz="0.0519841120343461 0.00128533886604094 0.205700000000028"
+      rpy="1.5707963267949 4.08640132765619E-15 -1.54607575393743" />
+    <parent
+      link="link4" />
+    <child
+      link="link5" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="link6">
+    <inertial>
+      <origin
+        xyz="-0.000487488203539693 -0.00051220625866924 0.00502342428325087"
+        rpy="0 0 0" />
+      <mass
+        value="0.0205479341797186" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gemini_arm_description/meshes/link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint6"
+    type="continuous">
+    <origin
+      xyz="-0.000500000000009104 0.0456999999999731 0.0520000000000012"
+      rpy="-1.5707963267949 1.54607575393742 -5.32136220132745E-14" />
+    <parent
+      link="link5" />
+    <child
+      link="link6" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+</robot>
