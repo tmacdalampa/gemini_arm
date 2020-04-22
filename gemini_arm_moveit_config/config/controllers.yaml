@@ -1,0 +1,12 @@
+controller_list:
+  - name: ""
+    action_ns: arm_controller/follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - axis1_joint 
+      - axis2_joint 
+      - axis3_joint 
+      - axis4_joint 
+      - axis5_joint 
+      - axis6_joint 
