@@ -337,218 +337,57 @@ def go_zero():
   print('zero pose reached')
   return plan_res 
 
+def go_ps123():
 
-#--------------20200416--------------
-
-def go_psupps():
+  ps1 = [0.004, 0, 0.512, 0 ,0.55, 0]
+  ps2 = [0.112, -0.189, 0.452, 1.508, -1.141, -0.27]
+  ps3 = [-0.136, -0.057, 0.505, -0.146, 0.451, -2.608]
+  ps123 = [ps1, ps2, ps3]
+    
   global group
-  joint_goal = group.get_current_joint_values()
-  joint_goal[0] = 0
-  joint_goal[1] = -0.78
-  joint_goal[2] = -0.78
-  joint_goal[3] = 0
-  joint_goal[4] = 0
-  joint_goal[5] = 0
-  plan_res = group.go(joint_goal)
-  group.stop()
-
-  joint_goal[5] = joint_goal[5] + 1.5708
-  plan_res = group.go(joint_goal)
-  group.stop()
-
   psg = group.get_current_pose().pose
-  psg.position.x = psg.position.x + 0.2
-  psg.position.y = psg.position.y + 0.2
-  psg.position.z = psg.position.z + 0.0
-  group.set_pose_target(psg)
-  time.sleep(2)
+
+
+  #roll = roll * 3.1416 / 180
+  #pitch = pitch * 3.1416 / 180
+  #yaw = yaw * 3.1416 / 180
+
+  #q = quaternion_from_euler(roll,pitch,yaw)
+  #psg.orientation = Quaternion(*q)
+  '''
+  group.set_pose_target(ps1)
+  plan_res = group.go(wait=True)
+  #time.sleep(2)
+  group.stop()
+  print('ps1 reach')
+  
+  #ps1 = group.get_current_pose().pose
+  group.set_pose_target(ps2)
+  plan_res = group.go(wait=True)
+  #time.sleep(2)
+  group.stop()
+  print('ps2 reach')
+
+  #ps2 = group.get_current_pose().pose
+  group.set_pose_target(ps3)
+  plan_res = group.go(wait=True)
+  #time.sleep(2)
+  group.stop()
+  print('ps3 reach')
+  '''
+  group.set_pose_targets(ps123)
   plan_res = group.go(wait=True)
   group.stop()
-  #group.clear_pose_targets()
-
+  print('finish')
+  
   return plan_res
-
-def go_ps_6_90():
-  global group
-  joint_goal = group.get_current_joint_values()
-  joint_goal[0] = 0
-  joint_goal[1] = -0.78
-  joint_goal[2] = -0.78
-  joint_goal[3] = 0
-  joint_goal[4] = 0
-  joint_goal[5] = 0
-  plan_res = group.go(joint_goal)
-  group.stop()
-
-  joint_goal[5] = joint_goal[5] + 1.5708
-  plan_res = group.go(joint_goal)
-  group.stop()
-
-  return plan_res
-
-def go_ps11():
-  global group
-  joint_goal = group.get_current_joint_values()
-  joint_goal[0] = 0.2977
-  joint_goal[1] = -1.3481
-  joint_goal[2] = -0.2612
-  joint_goal[3] = 0
-  joint_goal[4] = -0.02962
-  joint_goal[5] = 1.8709
-  plan_res = group.go(joint_goal)
-  group.stop()
-
-  action('o')
-
-  psg = group.get_current_pose().pose
-  #print(psg)
-  psg.position.z = psg.position.z - 0.08
-  group.set_pose_target(psg)
-  print('sleep 2 sec')
-  time.sleep(2)
-  plan_res = group.go(wait=True)
-  group.stop()
-
-  action('c')  
-
-  psg = group.get_current_pose().pose
-  #print(psg)
-  psg.position.z = psg.position.z + 0.08
-  group.set_pose_target(psg)
-  print('sleep 2 sec')
-  time.sleep(2)
-  plan_res = group.go(wait=True)
-  group.stop()
-
-  psg = group.get_current_pose().pose
-  #print(psg)
-  psg.position.z = psg.position.z - 0.08
-  group.set_pose_target(psg)
-  print('sleep 2 sec')
-  time.sleep(2)
-  plan_res = group.go(wait=True)
-  group.stop()
-
-  action('o')
-
-  psg = group.get_current_pose().pose
-  #print(psg)
-  psg.position.z = psg.position.z + 0.08
-  group.set_pose_target(psg)
-  print('sleep 2 sec')
-  time.sleep(2)
-  plan_res = group.go(wait=True)
-  group.stop()
-
-  return plan_res
-
-#--------------20200416--------------
-
-#--------------20200420--------------
-def onecycle(X,Y,Z,roll,pitch,yaw):
-
-    action('o')
-    
-    #idel pose
-    if go_idel():
-        time.sleep(1)
-
-    ##ready pose    
-    #if GoToJoint(0,-45,-45,0,0,90):
-    #    time.sleep(1)
-
-    #pick pose(up)
-    if GoToPoint(X,Y,Z,roll,pitch,yaw):
-        time.sleep(1)
-
-    
-    #pick pose
-    if MoveRelativeXYZ(0,0,-0.1,0,0,0):
-        print('start sleep 5 secs')
-        time.sleep(1)
-    
-    
-    action('c')
-
-    #pickup pose
-    if MoveRelativeXYZ(-0.05,0,0.03,10,0,0):
-        print('start sleep 5 secs')
-        time.sleep(2) 
-  
-    #pickup
-    if MoveRelativeXYZ(0,0,0.1,0,0,0):
-        print('start sleep 5 secs')
-        time.sleep(1) 
-
-  
-    if go_idel():
-        print('start sleep 1 secs')
-        time.sleep(1)
-
-  
-    #go to AOI 5 pose------------------------------------
-    if GoToPoint(-0.435, 0.559, 0.920, -1.595 ,1.495, 0.061):
-      time.sleep(1)
-
-    #pose1
-    if MoveRelativeXYZ(0,0.1,0,0,0,0):
-      time.sleep(1)
-  
-      #pose2
-    if MoveRelativeXYZ(0,0.1,0,0,0,0):
-      time.sleep(1)
-    
-    #pose3
-    if MoveRelativeJoint(0,0,0,0,0,30):
-      time.sleep(1)
-
-    #pose4
-    if MoveRelativeJoint(0,0,0,0,0,150):
-      time.sleep(1)
-    
-    #pose5
-    if MoveRelativeXYZ(0,-0.1,0,0,0,0):
-      time.sleep(1)
-    #--------------------------------------------------------
-
-  
-    if go_idel():
-        print('start sleep 1 secs')
-        time.sleep(1)
-
-    #ready place pose(up)
-    if GoToPoint(X,Y,Z,roll,pitch,yaw):
-        print('start sleep 1 secs')
-        time.sleep(1)
-    
-    #place
-    if MoveRelativeXYZ(-0.05,0,-0.08,10,0,0):
-        print('start sleep 5 secs')
-        time.sleep(2)
-
-    
-    action('o')
-    
-    if MoveRelativeXYZ(0,0,0.08,0,0,0):
-        print('start sleep 5 secs')
-        time.sleep(1)
-    
-    if go_idel():
-        print('start sleep 1 secs')
-        time.sleep(1)
     
 
 #--------------20200420--------------
 if __name__ == '__main__':
   rospy.init_node('pick_and_place')
-
-  #sim = rospy.get_param('~sim', True)
-  #offset_z = rospy.get_param('~above_target_dist', 0.05)
   
   moveGroupClient = actionlib.SimpleActionClient('move_group', MoveGroupAction)
-  #moveGroupClient.wait_for_server(rospy.Duration())
-  #group = moveit_commander.MoveGroupCommander(
-  #  'arm', '/scorpio/mmp0/robot_description', '/scorpio/mmp0')
   group = moveit_commander.MoveGroupCommander('gemini_arm')
   group.set_goal_orientation_tolerance(0.001)
   group.set_goal_position_tolerance(0.001)
@@ -560,83 +399,9 @@ if __name__ == '__main__':
 
   start_time = time.time()
   
-  if go_idel():
+  if go_ps123():
       time.sleep(1)
 
-  #if go_zero():
-  #	  time.sleep(1)
-
-  #first gun position
-
-  #print('start 1 gun') 
-
-  #for(i=0 in range)
-  
-  
-
-  '''
-  if onecycle(-0.991  + (0.0025 * 0),0.219 - (0.045 * 0),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-  
-  if onecycle(-0.991  + (0.0025 * 1),0.219 - (0.045 * 1),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-  
-  if onecycle(-0.991  + (0.0025 * 2),0.219 - (0.045 * 2),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-  
-  if onecycle(-0.991  + (0.0025 * 3),0.219 - (0.045 * 3),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991  + (0.0025 * 4),0.219 - (0.045 * 4),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991  + (0.0025 * 5),0.219 - (0.045 * 5),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991  + (0.0025 * 6),0.219 - (0.045 * 6),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991  + (0.0025 * 7),0.219 - (0.045 * 7),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)  
-
-  if onecycle(-0.991  + (0.0025 * 8),0.219 - (0.045 * 8),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-  
-  
-  if onecycle(-0.991  + (0.0025 * 9),0.219 - (0.045 * 9),0.554 + 0.1,3.141,0.061,-1.418):
-    time.sleep(2)
-
-  #-------------------------------second row-----------------------------------
-  if onecycle(-0.991 + 0.18 + (0.0025 * 0),0.219 + 0.005 - (0.045 * 0),0.554 + 0.1 - (0.0003 * 0),3.141,0.061,-1.418):
-    time.sleep(2)
-  
-  if onecycle(-0.991 + 0.18 + (0.0025 * 1),0.219 + 0.005 - (0.045 * 1),0.554 + 0.1 - (0.0003 * 1),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 2),0.219 + 0.005 - (0.045 * 2),0.554 + 0.1 - (0.0003 * 2),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 3),0.219 + 0.005 - (0.045 * 3),0.554 + 0.1 - (0.0003 * 3),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 4),0.219 + 0.005 - (0.045 * 4),0.554 + 0.1 - (0.0003 * 4),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 5),0.219 + 0.005 - (0.045 * 5),0.554 + 0.1 - (0.0003 * 5),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 6),0.219 + 0.005 - (0.045 * 6),0.554 + 0.1 - (0.0003 * 6),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 7),0.219 + 0.005 - (0.045 * 7),0.554 + 0.1 - (0.0003 * 7),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 8),0.219 + 0.005 - (0.045 * 8),0.554 + 0.1 - (0.0003 * 8),3.141,0.061,-1.418):
-    time.sleep(2)
-
-  if onecycle(-0.991 + 0.18 + (0.0025 * 9),0.219 + 0.005 - (0.045 * 9),0.554 + 0.1 - (0.0003 * 9),3.141,0.061,-1.418):
-    time.sleep(2)
-  '''
   end_time = time.time()
 
   print(end_time-start_time)

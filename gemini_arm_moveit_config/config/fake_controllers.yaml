@@ -1,5 +1,7 @@
+rate: 10 
 controller_list:
   - name: fake_gemini_arm_controller
+    type: interpolate
     joints:
       - joint1
       - joint2
