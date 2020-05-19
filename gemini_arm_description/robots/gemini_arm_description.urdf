@@ -82,7 +82,7 @@
   </link>
   <joint
     name="joint1"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0 0.101999999999998"
       rpy="0 0 0" />
@@ -140,7 +140,7 @@
   </link>
   <joint
     name="joint2"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0 0.0499999999999997"
       rpy="1.57079632679489 0 0" />
@@ -198,7 +198,7 @@
   </link>
   <joint
     name="joint3"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0.16 0"
       rpy="0 0 0" />
@@ -256,7 +256,7 @@
   </link>
   <joint
     name="joint4"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0.06 0"
       rpy="-1.5707963267949 0 0" />
@@ -314,7 +314,7 @@
   </link>
   <joint
     name="joint5"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0.0520000000000001 0.1662"
       rpy="1.5707963267949 0 0" />
@@ -372,7 +372,7 @@
   </link>
   <joint
     name="joint6"
-    type="continuous">
+    type="revolute">
     <origin
       xyz="0 0.046199999999943 0.052"
       rpy="-1.5707963267949 1.55872001956863E-31 1.50753608972822E-15" />
