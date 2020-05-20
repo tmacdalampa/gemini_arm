@@ -44,8 +44,15 @@ if __name__=="__main__":
   rospy.init_node('gemini_arm_teleop_joint', anonymous=True)
   rate = rospy.Rate(10)
 
-  psg = MotorStates()
-  psg.data = [0,0,0,0,0,0]
+  msg1 = MotorState()
+  msg2 = MotorState()
+  msg3 = MotorState()
+  msg4 = MotorState()
+  msg5 = MotorState()
+  msg6 = MotorState()
+  msg = MotorStates()
+
+  
 
   coord_diff = COORD_DIFF
   status = 0
@@ -61,40 +68,40 @@ if __name__=="__main__":
 
     # Move around 
     if key == 'q':
-      psg.data[0] = psg.data[0] + coord_diff
+      msg1.position = msg1.position + coord_diff
     
     elif key == 'a':
-      psg.data[0] = psg.data[0] - coord_diff 
+      msg1.position = msg1.position - coord_diff 
 
     elif key == 'w':
-      psg.data[1] = psg.data[1] + coord_diff
+      msg2.position = msg2.position + coord_diff
 
     elif key == 's':
-      psg.data[1] = psg.data[1] + coord_diff
+      msg2.position = msg2.position + coord_diff
 
     elif key == 'e':
-      psg.data[2] = psg.data[2] + coord_diff
+      msg3.position = msg3.position + coord_diff
 
     elif key == 'd':
-      psg.data[2] = psg.data[2] - coord_diff
+      msg3.position = msg3.position - coord_diff
 
     elif key == 'r':
-      psg.data[3] = psg.data[3] + coord_diff
+      msg4.position = msg4.position + coord_diff
 
     elif key == 'f':
-      psg.data[3] = psg.data[3] - coord_diff
+      msg4.position = msg4.position - coord_diff
 
     elif key == 't':
-      psg.data[4] = psg.data[4] + coord_diff
+      msg5.position = msg5.position + coord_diff
 
     elif key == 'g':
-      psg.data[4] = psg.data[4] - coord_diff
+      msg5.position = msg5.position - coord_diff
 
     elif key == 'y':
-      psg.data[5] = psg.data[5] + coord_diff
+      msg6.position = msg6.position + coord_diff
 
     elif key == 'h':
-      psg.data[5] = psg.data[5] - coord_diff
+      msg6.position = msg6.position - coord_diff
 
     elif key == 'c':
       print("exit")
@@ -102,8 +109,15 @@ if __name__=="__main__":
 
     else:
       continue
+    
+    msg.states.append(msg1);
+    msg.states.append(msg2);
+    msg.states.append(msg3);
+    msg.states.append(msg4);
+    msg.states.append(msg5);
+    msg.states.append(msg6);
 
-    pub.publish(psg)
+    pub.publish(msg.states)
     rate.sleep()
 
 
