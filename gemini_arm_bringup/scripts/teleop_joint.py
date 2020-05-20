@@ -5,6 +5,7 @@ import copy
 import math
 import numpy as np
 from std_msgs.msg import Float32MultiArray
+from maxon_epos_msgs.msg import MotorStates, MotorState
 
 
 
@@ -25,7 +26,7 @@ t/g : axis5 joint +/-
 y/h : axis6 joint +/-
 
 
-e: exit
+c: exit
 ===================================
 """
  
@@ -39,11 +40,11 @@ def getKey():
 
 if __name__=="__main__":
   settings = termios.tcgetattr(sys.stdin)
-  pub = rospy.Publisher('/maxon/set_all_states', Float32MultiArray, queue_size=10)
-  rospy.init_node('gemini_arm_teleop_xyz', anonymous=True)
+  pub = rospy.Publisher('/maxon_bringup/set_all_states', Float32MultiArray, queue_size=10)
+  rospy.init_node('gemini_arm_teleop_joint', anonymous=True)
   rate = rospy.Rate(10)
 
-  psg = Float32MultiArray()
+  psg = MotorStates()
   psg.data = [0,0,0,0,0,0]
 
   coord_diff = COORD_DIFF

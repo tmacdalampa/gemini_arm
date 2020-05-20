@@ -118,9 +118,9 @@ def go_idel():
   joint_goal = group.get_current_joint_values()
   joint_goal[0] = 0
   joint_goal[1] = 0.78 #45 #
-  joint_goal[2] = -1.2
+  joint_goal[2] = 0.78
   joint_goal[3] = 0
-  joint_goal[4] = -0.13 #-7.448 #
+  joint_goal[4] = 0.13 #-7.448 #
   joint_goal[5] = 0
 
   #joint_goal = joint_goal * pi/180
@@ -399,7 +399,7 @@ if __name__ == '__main__':
 
   start_time = time.time()
   
-  if go_ps123():
+  if go_idel():
       time.sleep(1)
 
   end_time = time.time()
