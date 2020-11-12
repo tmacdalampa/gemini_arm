@@ -1,0 +1,3 @@
+string gripper_state
+---
+bool result

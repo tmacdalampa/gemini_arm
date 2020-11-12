@@ -1,0 +1,10 @@
+
+Use ros to command the servo motor
+
+~Original Stayalong Fucntion~
+run following command:
+roscore
+rosrun rosserial_python serial_node.py /dev/ttyACM0
+rostopic pub servo std_msgs/UInt16  <angle>
+
+http://wiki.ros.org/rosserial_python

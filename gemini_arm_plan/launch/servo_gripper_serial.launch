@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
+    <param name="port" value="/dev/ttyACM0"/>
+    <!--param name="baud" value="115200"/-->
+  </node>
+
+  <!--node pkg="gemini_arm_plan" type="servo_gripper_service.py" name="servo_gripper">
+  </node-->
+
+  <node pkg="gemini_arm_plan" type="servo_gripper_degree_ser.py" name="servo_gripper">
+  </node>
+
+</launch>
