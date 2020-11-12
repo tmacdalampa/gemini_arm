@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find maxon_epos_example)/launch/example_maxon_epos.launch"/>
+  <include file="$(find gemini_arm_moveit_config)/launch/gemini_arm_moveit_execution.launch"/>
+  <arg name="rqt" default="false"/>
+  <include file="$(find gemini_arm_plan)/launch/servo_gripper_serial.launch"/>
+  
+
+  <group if="$(arg rqt)">
+    <!-- Gui arm (Optional)-->
+    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller"/>
+  </group>
+
+ </launch>
