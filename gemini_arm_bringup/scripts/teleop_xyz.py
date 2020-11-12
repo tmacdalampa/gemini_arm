@@ -15,7 +15,7 @@ from geometry_msgs.msg import Twist, Pose, PoseStamped, PoseArray, Quaternion, P
 from sensor_msgs.msg import JointState
 
 
-COORD_DIFF = 0.01
+COORD_DIFF = 0.05 #0.01
 
 msg_hint="""
 

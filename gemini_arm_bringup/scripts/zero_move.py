@@ -34,6 +34,19 @@ def go_idel():
   group.stop()
   return plan_res
 
+def go_attack():
+  joint_goal = group.get_current_joint_values()
+  joint_goal[0] = -0.1745244860649109
+  joint_goal[1] = 0
+  joint_goal[2] = -1.7453173398971558
+  joint_goal[3] = 0
+  joint_goal[4] = 0
+  joint_goal[5] = 0.08725282549858093
+  group.go(joint_goal)
+  group.stop()
+
+  return 
+
 if __name__ == '__main__':
   rospy.init_node('pick_and_place')
 
@@ -49,6 +62,7 @@ if __name__ == '__main__':
 
   rospy.loginfo('Ready to plan.')
   raw_input()
-  #pickCB()
+  go_attack()
+  rospy.sleep(5)
   go_idel()
   rospy.spin()

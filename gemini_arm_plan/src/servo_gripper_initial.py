@@ -18,10 +18,14 @@ def Pose_client(num):
         print "Service call failed: %s"%e
 
 if __name__ == "__main__":
-   rospy.loginfo('GRIPPER INITAIL!')
-   
-   Pose_client(30)
-   rospy.sleep(1)
-   Pose_client(120)
-   rospy.sleep(1)
-   Pose_client(30)
+  rospy.loginfo('GRIPPER INITAIL!')
+  '''
+  Pose_client(30)
+  rospy.sleep(1)
+  Pose_client(120)
+  rospy.sleep(1)
+  Pose_client(30)
+  '''
+  rospy.sleep(1)
+  Pose_client(120)
+  rospy.sleep(1)

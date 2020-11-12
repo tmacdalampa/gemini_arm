@@ -40,7 +40,7 @@ def getKey():
 
 if __name__=="__main__":
   settings = termios.tcgetattr(sys.stdin)
-  pub = rospy.Publisher('/maxon_bringup/set_all_states', Float32MultiArray, queue_size=10)
+  pub = rospy.Publisher('/maxon_bringup/set_all_states', MotorStates, queue_size=10)
   rospy.init_node('gemini_arm_teleop_joint', anonymous=True)
   rate = rospy.Rate(10)
 
@@ -77,7 +77,7 @@ if __name__=="__main__":
       msg2.position = msg2.position + coord_diff
 
     elif key == 's':
-      msg2.position = msg2.position + coord_diff
+      msg2.position = msg2.position - coord_diff
 
     elif key == 'e':
       msg3.position = msg3.position + coord_diff
@@ -117,7 +117,7 @@ if __name__=="__main__":
     msg.states.append(msg5);
     msg.states.append(msg6);
 
-    pub.publish(msg.states)
+    pub.publish(msg)
     rate.sleep()
 
 
