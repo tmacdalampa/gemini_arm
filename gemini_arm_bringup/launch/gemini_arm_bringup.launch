@@ -1,6 +1,6 @@
 <launch>
   <include file="$(find maxon_epos_example)/launch/example_maxon_epos.launch"/>
-  <include file="$(find gemini_arm_moveit_config)/launch/gemini_arm_moveit_execution.launch"/>
+  <include file="$(find gemini_arm_moveit_config)/launch/demo.launch"/>
   <arg name="rqt" default="false"/>
 
 
