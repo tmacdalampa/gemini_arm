@@ -1,35 +1,40 @@
 #!/usr/bin/env python
 import rospy
-import select, termios, tty, sys
+import actionlib
+import select, termios, tty, sys, moveit_commander, random
 import copy
-import math
 import numpy as np
-from std_msgs.msg import Float32MultiArray
-from maxon_epos_msgs.msg import MotorStates, MotorState
+import math
 
+from tf.transformations import quaternion_from_euler
+from moveit_msgs.msg import PickupAction, PickupGoal, Grasp
+from moveit_msgs.msg import MoveItErrorCodes, DisplayTrajectory, RobotTrajectory
+from actionlib import SimpleActionClient, GoalStatus
+from control_msgs.msg import FollowJointTrajectoryAction, FollowJointTrajectoryActionGoal, FollowJointTrajectoryGoal
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+from geometry_msgs.msg import Twist, Pose, PoseStamped, PoseArray, Quaternion, Point
+from sensor_msgs.msg import JointState
 
 
 COORD_DIFF = 5*math.pi/180
 
 msg_hint="""
-
 ===================================
 Moving around:
    q    w    e    r    t    y
    a    s    d    f    g    h
-
-q/a : axis1 joint +/-
-w/s : axis2 joint +/-
-e/d : axis3 joint +/-
-r/f : axis4 joint +/-
-t/g : axis5 joint +/-
-y/h : axis6 joint +/-
-
-
-c: exit
+q/a : axis1 joint +/- 5 degrees
+w/s : axis2 joint +/- 5 degrees
+e/d : axis3 joint +/- 5 degrees
+r/f : axis4 joint +/- 5 degrees
+t/g : axis5 joint +/- 5 degrees
+y/h : axis6 joint +/- 5 degrees
+b: exit
 ===================================
 """
- 
+scene = moveit_commander.PlanningSceneInterface()
+robot = moveit_commander.RobotCommander()
+
 def getKey():
   tty.setraw(sys.stdin.fileno())
   select.select([sys.stdin], [], [], 0)
@@ -40,19 +45,23 @@ def getKey():
 
 if __name__=="__main__":
   settings = termios.tcgetattr(sys.stdin)
-  pub = rospy.Publisher('/maxon_bringup/set_all_states', MotorStates, queue_size=10)
-  rospy.init_node('gemini_arm_teleop_joint', anonymous=True)
-  rate = rospy.Rate(10)
 
-  msg1 = MotorState()
-  msg2 = MotorState()
-  msg3 = MotorState()
-  msg4 = MotorState()
-  msg5 = MotorState()
-  msg6 = MotorState()
-  msg = MotorStates()
-
+  rospy.init_node('gemini_arm_teleop_joint')
+  moveit_commander.roscpp_initialize(sys.argv)
   
+  group_arm = moveit_commander.MoveGroupCommander("gemini_arm")
+
+
+
+  # Get current pose
+  #ps = Pose()
+  #ps = group_arm.get_current_pose().pose
+
+  global joint_goal
+  #joint_goal = group_arm.get_current_joint_values()
+
+  #for i in range(0, 5, 1):
+  #  print joint_goal[i]
 
   coord_diff = COORD_DIFF
   status = 0
@@ -62,62 +71,67 @@ if __name__=="__main__":
   while not rospy.is_shutdown():
     key = getKey()
 
-    # Print hint
-    if (status == 14):
-      print(msg_hint)
+    joint_goal = group_arm.get_current_joint_values()
 
-    # Move around 
-    if key == 'q':
-      msg1.position = msg1.position + coord_diff
-    
+    # Move around
+    if key == 'b':
+      print('break')
+      break 
+    elif key == 'q':
+      print('q')
+      joint_goal[0] = joint_goal[0] + coord_diff
+      #print(joint_goal[0])
+
     elif key == 'a':
-      msg1.position = msg1.position - coord_diff 
+      print('a')
+      joint_goal[0] = joint_goal[0] - coord_diff
 
     elif key == 'w':
-      msg2.position = msg2.position + coord_diff
+      print('w')
+      joint_goal[1] = joint_goal[1] + coord_diff
 
     elif key == 's':
-      msg2.position = msg2.position + coord_diff
+      print('s')
+      joint_goal[1] = joint_goal[1] - coord_diff
 
     elif key == 'e':
-      msg3.position = msg3.position + coord_diff
-
+      print('e')
+      joint_goal[2] = joint_goal[2] + coord_diff
+      
     elif key == 'd':
-      msg3.position = msg3.position - coord_diff
-
+      print('d')
+      joint_goal[2] = joint_goal[2] - coord_diff
+    
     elif key == 'r':
-      msg4.position = msg4.position + coord_diff
-
+      print('r')
+      joint_goal[3] = joint_goal[3] + coord_diff
+    
     elif key == 'f':
-      msg4.position = msg4.position - coord_diff
-
+      #print('f')
+      joint_goal[3] = joint_goal[3] - coord_diff
+      print('f')
+      
     elif key == 't':
-      msg5.position = msg5.position + coord_diff
-
+      print('t')
+      joint_goal[4] = joint_goal[4] + coord_diff
+      
     elif key == 'g':
-      msg5.position = msg5.position - coord_diff
-
+      print('g')
+      joint_goal[4] = joint_goal[4] - coord_diff
+      
     elif key == 'y':
-      msg6.position = msg6.position + coord_diff
-
+      print('y')
+      joint_goal[5] = joint_goal[5] + coord_diff
+      
     elif key == 'h':
-      msg6.position = msg6.position - coord_diff
+      #print('h')
+      joint_goal[5] = joint_goal[5] - coord_diff
+      print('h')
 
-    elif key == 'c':
-      print("exit")
-      break
+  
 
+    
     else:
       continue
-    
-    msg.states.append(msg1);
-    msg.states.append(msg2);
-    msg.states.append(msg3);
-    msg.states.append(msg4);
-    msg.states.append(msg5);
-    msg.states.append(msg6);
 
-    pub.publish(msg)
-    rate.sleep()
-
-
+    group_arm.go(joint_goal)
