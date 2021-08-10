@@ -120,21 +120,24 @@ if __name__ == '__main__':
   raw_input()
   
   start_time = time.time()
+  for i in range (1):
+    GoToJoint(0, 0.52, 1.05, 0, -1.56, 0)
+    time.sleep(1)
   
-  GoToJoint(0, 0.52, 0.96, 0, -1.48, 0)
-  time.sleep(1)
-  MoveRelativeXYZ(0, 0, -0.05, 0, 0, 0)
-  time.sleep(2)
+    MoveRelativeXYZ(0, 0, -0.1-0.05*i, 0, 0, 0)
+    time.sleep(2)
   
-  GoToJoint(0.5, 0.52, 0.96, 0, 0, 0)
-  time.sleep(1)
-  GoToJoint(-0.5, 0.52, 0.96, 0, 0, 0)
-  time.sleep(1)
-  GoToJoint(-0.6, 0.52, 0.96, 0, -1.48, 0)
-  time.sleep(1)
-  GoToJoint(-0.6, 0.6, 1.3, 0, -1.15, 0)
-  time.sleep(2)
-  GoToJoint(0, 0, 0, 0, 0, 0)
+    MoveRelativeXYZ(0, 0, 0.05, 0, 0, 0)
+    time.sleep(1)
+    GoToJoint(0.5, 0.52, 0.96, 0, 0, 0)
+    time.sleep(1)
+    GoToJoint(-0.5, 0.52, 0.96, 0, 0, 0)
+    time.sleep(1)
+    GoToJoint(-0.6, 0.52, 1.05, 0, -1.56, 0)
+    time.sleep(1)
+    MoveRelativeXYZ(0, 0, -0.1+0.05*i, 0, 0, 0)
+    time.sleep(2)
+    GoToJoint(0, 0, 0, 0, 0, 0)
   
 
   end_time = time.time()
